@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "fiesc-study-case"
+version = "0.1.0"
+description = ""
+authors = ["Rodrigo <rodrigokrosa@gmail.com>"]
+readme = "README.md"
+packages = [{include = "fiesc_study_case"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.26.4"
+pandas = "^2.2.0"
+scikit-learn = "^1.4.0"
+scipy = "^1.12.0"
+matplotlib = "^3.8.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pre-commit = "^3.6.0"
+ipykernel = "^6.29.2"
+black = "^24.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
