@@ -122,7 +122,7 @@ repos:
     hooks:
       - id: codespell
         args:
-          - --skip=logs/**,data/**,*.ipynb,*.lock,*.toml,*.yaml,*.yml,*.json
+          - --skip=logs/**,data/**,*.ipynb,*.lock,*.toml,*.yaml,*.yml,*.json,*.md
           # - --ignore-words-list=abc,def
 
   - repo: https://github.com/python-poetry/poetry

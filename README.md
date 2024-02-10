@@ -6,7 +6,6 @@ Você como pesquisador da área de Inteligência Artificial, foi designado para 
 
 Desenvolva o Pipeline completo de um projeto de Aprendizado de Máquina, desde a Análise e preparação dos dados adquiridos até a disponibilização do algoritmo no GitHub.
 
-
 ## Descrição dos dados
 
 Foram disponibilizados seis (6) arquivos com extensão .npy. Sabe-se que cada arquivo foi adquirido por um sensor, os dados são oriundos de uma máquina com motor elétrico, os quais foram aquisitados a uma taxa de 10 KHz. Os dados de todos os sensores, foram adquiridos de forma simultânea, ou seja, no mesmo instante de tempo. O arquivo Classes.npy possui diferentes estados de funcionamento dessa máquina, podendo ou não possuir diferentes falhas e/ou funcionamento normal.
@@ -22,3 +21,8 @@ Itens avaliados na entrega do projeto:
 - Interpretação do problema;
 - Etapas do Pipeline realizadas e qualidade de sua execução o Pré-processamento, Engenharia de Requisitos, Seleção do Modelo, Avaliação do Modelo, disponibilização dos resultados.
 
+## Requisitos de software
+
+É permitido o uso de qualquer IDE e Biblioteca de Aprendizado de Máquina, desde que respeite às seguintes exigências:
+
+- Linguagem de Programação Python.
