@@ -1,0 +1,11 @@
+defaults:
+  - _self_
+  - features: default
+  - filters: default
+  - representations: default
+  - hydra: default
+  - paths: default
+
+sampling_rate: 10000
+task_name: feature_engineering
+run_name: all_features

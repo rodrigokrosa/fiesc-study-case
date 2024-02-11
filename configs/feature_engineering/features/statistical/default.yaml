@@ -1,0 +1,39 @@
+mean:
+  _target_: numpy.mean
+  _partial_: true
+
+std:
+  _target_: numpy.std
+  _partial_: true
+
+max:
+  _target_: numpy.max
+  _partial_: true
+
+min:
+  _target_: numpy.min
+  _partial_: true
+
+median:
+  _target_: numpy.median
+  _partial_: true
+
+rms:
+  _target_: utils.features.statistical.rms
+  _partial_: true
+
+kurtosis:
+  _target_: utils.features.statistical.kurtosis
+  _partial_: true
+
+skewness:
+  _target_: utils.features.statistical.skewness
+  _partial_: true
+
+shape_factor:
+  _target_: utils.features.statistical.shape_factor
+  _partial_: true
+
+peak_to_peak:
+  _target_: utils.features.statistical.peak_to_peak
+  _partial_: true

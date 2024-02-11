@@ -1,0 +1,25 @@
+defaults:
+  - statistical: default
+  - impulsive: default
+  - spectral: default
+
+drop_cols:
+  [
+    "sensor_1/acceleration",
+    "sensor_2/acceleration",
+    "sensor_3/acceleration",
+    "sensor_5/acceleration",
+    "sensor_1/velocity",
+    "sensor_2/velocity",
+    "sensor_3/velocity",
+    "sensor_1/displacement",
+    "sensor_2/displacement",
+    "sensor_3/displacement",
+    "sensor_1/envelope_spectrum",
+    "sensor_2/envelope_spectrum",
+    "sensor_3/envelope_spectrum",
+    "sensor_1/fft",
+    "sensor_2/fft",
+    "sensor_3/fft",
+    "sensor_5/fft",
+  ]
