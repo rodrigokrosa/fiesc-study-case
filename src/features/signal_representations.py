@@ -1,6 +1,7 @@
+from typing import Dict, List
+
 import pandas as pd
 
-from configs.feature_configs import SAMPLING_RATE, SIGNAL_REPRESENTATIONS
 from utils.filters import array_filter
 from utils.signal_representations import (
     acc_to_displ,
@@ -10,37 +11,40 @@ from utils.signal_representations import (
 )
 
 
-def get_signal_representations(dataset: pd.DataFrame) -> pd.DataFrame:
-    """Calculate different signal representations based on the given dataset.
+def get_signal_representations(
+    dataset: pd.DataFrame, fs: int, signal_representations: Dict[str, List[str]]
+) -> pd.DataFrame:
+    """Generate signal representations for a given dataset.
 
     Args:
-        dataset (pd.DataFrame): The input dataset containing acceleration data.
+        dataset (pd.DataFrame): The input dataset.
+        fs (int): The sampling frequency of the signals.
+        signal_representations (Dict[str, List[str]]): A dictionary specifying the signal representations to generate.
 
     Returns:
-        pd.DataFrame: The dataset with additional columns representing velocity, displacement,
-        spectrum, and envelope spectrum signal representations.
+        pd.DataFrame: The dataset with the generated signal representations.
     """
     # Velocity signal representation
-    dataset[SIGNAL_REPRESENTATIONS["velocity"]] = dataset[
-        SIGNAL_REPRESENTATIONS["acceleration"][:-1]
-    ].map(lambda x: acc_to_vel(x, SAMPLING_RATE))
+    dataset[signal_representations["velocity"]] = dataset[
+        signal_representations["acceleration"][:-1]
+    ].map(lambda x: acc_to_vel(x, fs))
 
     # Displacement signal representation
-    dataset[SIGNAL_REPRESENTATIONS["displacement"]] = dataset[
-        SIGNAL_REPRESENTATIONS["acceleration"][:-1]
-    ].map(lambda x: acc_to_displ(x, SAMPLING_RATE))
+    dataset[signal_representations["displacement"]] = dataset[
+        signal_representations["acceleration"][:-1]
+    ].map(lambda x: acc_to_displ(x, fs))
 
     # Spectrum signal representation
-    dataset[SIGNAL_REPRESENTATIONS["fft"]] = dataset[SIGNAL_REPRESENTATIONS["acceleration"]].map(
+    dataset[signal_representations["fft"]] = dataset[signal_representations["acceleration"]].map(
         lambda x: get_fft(x)
     )
 
     # Envelope spectrum signal representation
     intermediate_acc_columns = [f"sensor_{num}/int_acceleration" for num in [1, 2, 3]]
-    dataset[intermediate_acc_columns] = dataset[SIGNAL_REPRESENTATIONS["acceleration"][:-1]].map(
-        lambda x: array_filter(x, SAMPLING_RATE, cutoff=[1000, 2500], filt_order=12)
+    dataset[intermediate_acc_columns] = dataset[signal_representations["acceleration"][:-1]].map(
+        lambda x: array_filter(x, fs, cutoff=[1000, 2500], filt_order=12)
     )
-    dataset[SIGNAL_REPRESENTATIONS["envelope_spectrum"]] = dataset[intermediate_acc_columns].map(
+    dataset[signal_representations["envelope_spectrum"]] = dataset[intermediate_acc_columns].map(
         lambda x: envelope_spectrum(x)
     )
     dataset = dataset.drop(columns=intermediate_acc_columns)

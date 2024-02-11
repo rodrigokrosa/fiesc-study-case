@@ -163,3 +163,4 @@ cython_debug/
 
 data/raw/*.npy
 data/processed/*.parquet
+logs/

@@ -14,7 +14,7 @@ def remove_nans(input_array: np.array) -> np.array:
     return input_array[~np.isnan(input_array)]
 
 
-def load_raw_data():
+def load_raw_data() -> pd.DataFrame:
     """Load raw data from files and create a dataset.
 
     Returns:

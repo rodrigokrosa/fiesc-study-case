@@ -1,111 +1,92 @@
-import autorootcwd  # noqa
+import logging
 
-from configs.feature_configs import IMPULSIVE, SPECTRAL_BANDS, STATISTICS
-from src.data.load_data import load_raw_data
+import autorootcwd  # noqa
+import hydra
+from hydra.utils import instantiate
+from omegaconf import DictConfig, OmegaConf
+
+from src.datamodule.components.load_data import load_raw_data
 from src.features.signal_representations import get_signal_representations
 from src.features.specialized_features import (
     get_frequency_domain_features,
     get_time_domain_features,
 )
-from utils.features.frequency_domain import filter_spectrum
-from utils.signal_representations import filter_envelope
+
+log = logging.getLogger(__name__)
 
 
-def preprocess():
+@hydra.main(
+    version_base="1.3",
+    config_path="../configs/feature_engineering",
+    config_name="feature_configs.yaml",
+)
+def preprocess(cfg: DictConfig) -> None:
     """Preprocesses the dataset by loading raw data, extracting signal representations, and
     calculating time and frequency domain features.
 
     Returns:
         dataset (pandas.DataFrame): Preprocessed dataset.
     """
+    log.info("Starting preprocessing...")
+
+    log.info("Loading raw data...")
     dataset = load_raw_data()
 
-    dataset = get_signal_representations(dataset)
-
-    dataset = get_time_domain_features(
-        dataset, feature_dict=STATISTICS, representations=["acceleration", "velocity"]
+    log.info("Extracting signal representations...")
+    dataset = get_signal_representations(
+        dataset,
+        fs=cfg.sampling_rate,
+        signal_representations=OmegaConf.to_object(cfg.representations.signal_representations),
     )
 
+    log.info("Calculating time domain statistical features...")
     dataset = get_time_domain_features(
-        dataset, feature_dict=IMPULSIVE, representations=["acceleration", "velocity"]
+        dataset,
+        feature_dict=cfg.features.statistical,
+        representations=["acceleration", "velocity"],
+        signal_representations=OmegaConf.to_object(cfg.representations.signal_representations),
     )
 
+    log.info("Calculating time domain impulsive features...")
+    dataset = get_time_domain_features(
+        dataset,
+        feature_dict=cfg.features.impulsive,
+        representations=["acceleration", "velocity"],
+        signal_representations=OmegaConf.to_object(cfg.representations.signal_representations),
+    )
+
+    log.info("Calculating frequency domain spectral band features...")
     dataset = get_frequency_domain_features(
         dataset,
-        feature_dict=SPECTRAL_BANDS,
-        cutoff_frequencies=[
-            [5, 500],
-            [500, 1000],
-            [5, 1000],
-            [500, 1500],
-            [1000, 1500],
-            [1500, 2000],
-            [2000, 3000],
-            [3000, 5000],
-        ],
+        fs=cfg.sampling_rate,
+        feature_dict=cfg.features.spectral,
+        cutoff_frequencies=OmegaConf.to_object(cfg.filters.spectral_bands),
         representation="fft",
-        filter_func=filter_spectrum,
+        signal_representations=OmegaConf.to_object(cfg.representations.signal_representations),
+        filter_func=instantiate(cfg.filters.spectrum),
     )
 
+    log.info("Calculating frequency domain envelope spectrum features...")
     dataset = get_frequency_domain_features(
         dataset,
-        feature_dict=SPECTRAL_BANDS,
-        cutoff_frequencies=[[5, 300], [250, 500], [450, 750], [700, 1050]],
+        fs=cfg.sampling_rate,
+        feature_dict=cfg.features.spectral,
+        cutoff_frequencies=OmegaConf.to_object(cfg.filters.envelope_bands),
         representation="envelope_spectrum",
-        filter_func=filter_envelope,
+        signal_representations=OmegaConf.to_object(cfg.representations.signal_representations),
+        filter_func=instantiate(cfg.filters.envelope),
     )
 
-    return dataset
+    log.info("Splitting dataset into representations and specialized features...")
+    representations_dataset = dataset[OmegaConf.to_object(cfg.representations.keep_cols)]
+    specialized_dataset = dataset.drop(columns=OmegaConf.to_object(cfg.features.drop_cols))
+
+    log.info("Saving datasets...")
+    representations_dataset.to_parquet("data/processed/signal_representation_features.parquet")
+
+    specialized_dataset.to_parquet("data/processed/specialized_features.parquet")
+    log.info("Done.")
 
 
 if __name__ == "__main__":
-    dataset = preprocess()
-
-    representations_dataset = dataset[
-        [
-            "classes",
-            "sensor_1/acceleration",
-            "sensor_2/acceleration",
-            "sensor_3/acceleration",
-            "sensor_5/acceleration",
-            "sensor_1/velocity",
-            "sensor_2/velocity",
-            "sensor_3/velocity",
-            "sensor_1/displacement",
-            "sensor_2/displacement",
-            "sensor_3/displacement",
-            "sensor_1/envelope_spectrum",
-            "sensor_2/envelope_spectrum",
-            "sensor_3/envelope_spectrum",
-            "sensor_1/fft",
-            "sensor_2/fft",
-            "sensor_3/fft",
-            "sensor_5/fft",
-        ]
-    ]
-
-    representations_dataset.to_parquet("data/processed/signal_representation_features.parquet")
-
-    specialized_dataset = dataset.drop(
-        columns=[
-            "sensor_1/acceleration",
-            "sensor_2/acceleration",
-            "sensor_3/acceleration",
-            "sensor_5/acceleration",
-            "sensor_1/velocity",
-            "sensor_2/velocity",
-            "sensor_3/velocity",
-            "sensor_1/displacement",
-            "sensor_2/displacement",
-            "sensor_3/displacement",
-            "sensor_1/envelope_spectrum",
-            "sensor_2/envelope_spectrum",
-            "sensor_3/envelope_spectrum",
-            "sensor_1/fft",
-            "sensor_2/fft",
-            "sensor_3/fft",
-            "sensor_5/fft",
-        ]
-    )
-
-    specialized_dataset.to_parquet("data/processed/specialized_features.parquet")
+    preprocess()
