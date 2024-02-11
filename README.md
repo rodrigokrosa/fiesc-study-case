@@ -1,4 +1,4 @@
-# fiesc-study-case
+# FIESC Study Case
 
 ## Problema
 
