@@ -162,3 +162,4 @@ cython_debug/
 .python-version
 
 data/raw/*.npy
+data/processed/*.parquet
