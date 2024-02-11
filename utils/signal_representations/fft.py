@@ -2,10 +2,7 @@ import numpy as np
 from scipy.fft import fft, fftfreq
 
 
-def get_fft(
-    data: np.array,
-    remove_mean: bool = True,
-) -> np.array:
+def get_fft(data: np.array, remove_mean: bool = True) -> np.array:
     """Compute the one-dimensional discrete Fourier Transform.
 
     Parameters:
@@ -23,7 +20,7 @@ def get_fft(
         data = data - np.mean(data)
 
     # FFT
-    spectrum = fft(data, n=n, axis=0) / n
+    spectrum = fft(data, n=n) / n
 
     # One-sided spectrum and frequencies
     mag_spectrum = np.abs(spectrum[: n // 2])
