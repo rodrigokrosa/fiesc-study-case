@@ -11,6 +11,7 @@
 - :white_check_mark: Feature engineering - signal representations (envelope, fft, velocity, displacement);
 - :white_check_mark: Visualizing features and their classes;
 - :white_check_mark: Organize feature engineering pipeline in scripts;
+- :white_check_mark: Organize configs using hydra
 - :white_large_square: Predictive task definition;
 - :white_large_square: Model pipeline;
 - :white_large_square: Unit test pipeline;
