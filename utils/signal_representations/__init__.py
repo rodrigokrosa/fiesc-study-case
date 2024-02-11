@@ -1,4 +1,4 @@
 from utils.signal_representations.displacement import acc_to_displ
-from utils.signal_representations.envelope import envelope_spectrum
+from utils.signal_representations.envelope import envelope_spectrum, filter_envelope
 from utils.signal_representations.fft import get_fft, get_fftfreq
 from utils.signal_representations.velocity import acc_to_vel
