@@ -19,7 +19,7 @@
 - :white_check_mark: Add Hydra to facilitate experiment tracking configs;
 - :white_check_mark: Add WandB to experiment tracking;
 - :white_check_mark: Baseline model with specialized features (Logistic Regression);
-- :white_large_square: Experiments with different architecures (RF, XGBoost, Catboost);
+- :white_check_mark: Experiments with different architecures (RF, XGBoost, Catboost);
 - :white_large_square: Feature selection (RFE);
 - :white_large_square: Final model;
 - :white_large_square: API endpoint with FastAPI;
