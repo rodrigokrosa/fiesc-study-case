@@ -1,6 +1,9 @@
 name: Spectrum endpoint - FastAPI Docker Image Test
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   code-quality:
