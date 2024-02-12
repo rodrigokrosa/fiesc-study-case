@@ -1,8 +1,8 @@
 # @package _global_
 
 defaults:
-  - override param_distributions: xgboost
-  - override trainer/model: xgboost
+  - override /param_distributions: xgboost
+  - override /trainer/model: xgboost
 
 model_name: XGBoost
 dataset_name: frequency-domain-features
