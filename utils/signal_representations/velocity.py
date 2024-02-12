@@ -4,7 +4,7 @@ import numpy as np
 def acc_to_vel(input_array: np.array, fs: int, convert: bool = False):
     """Converts acceleration to velocity.
 
-    Args:
+    Parameters:
         input_array (np.array): Array of acceleration values.
         fs (int): Sampling frequency in Hz.
         convert (bool, optional): Whether to convert the input_array from g to mm/s^2. Defaults to False.

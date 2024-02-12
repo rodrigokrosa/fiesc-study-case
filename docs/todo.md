@@ -11,14 +11,14 @@
 - :white_check_mark: Feature engineering - signal representations (envelope, fft, velocity, displacement);
 - :white_check_mark: Visualizing features and their classes;
 - :white_check_mark: Organize feature engineering pipeline in scripts;
-- :white_large_square: Predictive task definition;
-- :white_large_square: Model pipeline;
+- :white_check_mark: Organize configs using hydra
+- :white_check_mark: Predictive task definition;
+- :white_check_mark: Model pipeline;
 - :white_large_square: Unit test pipeline;
-- :white_large_square: Add CI workflow with Github Actions;
-- :white_large_square: Add Hydra to facilitate experiment tracking configs;
-- :white_large_square: Add WandB to experiment tracking;
-- :white_large_square: Baseline model with spectrum (Logistic Regression);
-- :white_large_square: Baseline model with specialized features (Logistic Regression);
+- :white_check_mark: Add CI workflow with Github Actions;
+- :white_check_mark: Add Hydra to facilitate experiment tracking configs;
+- :white_check_mark: Add WandB to experiment tracking;
+- :white_check_mark: Baseline model with specialized features (Logistic Regression);
 - :white_large_square: Experiments with different architecures (RF, XGBoost, Catboost);
 - :white_large_square: Feature selection (RFE);
 - :white_large_square: Final model;

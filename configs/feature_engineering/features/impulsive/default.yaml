@@ -1,0 +1,15 @@
+peak:
+  _target_: utils.features.impulsive.peak
+  _partial_: true
+
+impulse_factor:
+  _target_: utils.features.impulsive.impulse_factor
+  _partial_: true
+
+crest_factor:
+  _target_: utils.features.impulsive.crest_factor
+  _partial_: true
+
+clearance_factor:
+  _target_: utils.features.impulsive.clearance_factor
+  _partial_: true

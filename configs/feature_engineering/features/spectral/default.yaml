@@ -1,0 +1,7 @@
+rms:
+  _target_: utils.features.frequency_domain.spectral_rms
+  _partial_: true
+
+peak:
+  _target_: utils.features.impulsive.peak
+  _partial_: true

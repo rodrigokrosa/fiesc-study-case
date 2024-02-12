@@ -37,7 +37,7 @@ def get_logarithm_spectrum(
 ) -> np.array:
     """Compute the logarithm of the spectral amplitudes.
 
-    Args:
+    Parameters:
         X (np.array): The input array representing the spectral amplitudes.
         dB_scale (bool, optional): Whether to scale the amplitudes in decibels. Defaults to True.
         remove_mean (bool, optional): Whether to remove the mean value of the logarithmic spectrum. Defaults to False.

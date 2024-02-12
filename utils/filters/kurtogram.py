@@ -22,11 +22,11 @@ def kurtogram_bandpass(input_array, fs):
           Mechanical systems and signal processing, v. 64, p. 100-131, 2015.
 
     Parameters:
-    input_array (array-like): The input array to be filtered.
-    fs (float): The sampling frequency of the input signal.
+        input_array (array-like): The input array to be filtered.
+        fs (float): The sampling frequency of the input signal.
 
     Returns:
-    tuple: A tuple containing the lowcut and highcut frequencies of the bandpass filter.
+        tuple: A tuple containing the lowcut and highcut frequencies of the bandpass filter.
     """
 
     nlevel = int(np.log2(len(input_array)) / 8) + 2
