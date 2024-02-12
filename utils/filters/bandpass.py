@@ -37,13 +37,13 @@ def array_filter(input_array: np.array, fs: int, cutoff: List[int], filt_order: 
     """Apply a bandpass filter to the input array.
 
     Parameters:
-    - array (np.array): Input array to be filtered.
-    - fs (int): Sampling frequency of the input array.
-    - cutoff (List[int]): Frequency range for the bandpass filter.
-    - filt_order (int): Order of the filter (default: 3).
+        array (np.array): Input array to be filtered.
+        fs (int): Sampling frequency of the input array.
+        cutoff (List[int]): Frequency range for the bandpass filter.
+        filt_order (int): Order of the filter (default: 3).
 
     Returns:
-    - filtered_array (np.array): Filtered array.
+        filtered_array (np.array): Filtered array.
     """
     lowcut = float(cutoff[0])
     highcut = float(cutoff[1])

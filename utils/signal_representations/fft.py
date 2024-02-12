@@ -32,7 +32,7 @@ def get_fft(data: np.array, remove_mean: bool = True) -> np.array:
 def get_fftfreq(samples: int, fs: int) -> np.array:
     """Calculate the frequencies of the FFT output.
 
-    Args:
+    Parameters:
         samples (int): The number of samples in the input signal.
         fs (int): The sampling frequency of the input signal.
 
