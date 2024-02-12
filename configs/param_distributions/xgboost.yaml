@@ -33,3 +33,5 @@ enable_categorical:
   - True
 random_state:
   - ${seed}
+n_jobs:
+  - -1

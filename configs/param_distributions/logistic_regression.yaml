@@ -2,3 +2,9 @@ C:
   _target_: scipy.stats.loguniform
   a: 1e-3
   b: 1e3
+
+max_iter:
+  - 2000
+
+random_state:
+  - ${seed}

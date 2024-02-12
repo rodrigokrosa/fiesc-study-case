@@ -1,8 +1,15 @@
 # @package _global_
 
-odel_name: LogisticRegression
+defaults:
+  - override /param_distributions: logistic_regression
+  - override /trainer/model: logistic_regression
+
+model_name: LogisticRegression
 dataset_name: time-domain-features
 exp_number: "1"
+
+search_strategy:
+  n_jobs: -1
 
 trainer:
   datamodule:
