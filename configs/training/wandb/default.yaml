@@ -1,0 +1,3 @@
+project: ${project_name}
+run_name: ${run_name}
+dir: ${paths.output_dir}

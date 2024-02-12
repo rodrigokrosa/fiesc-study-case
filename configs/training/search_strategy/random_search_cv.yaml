@@ -1,0 +1,11 @@
+defaults:
+  - cv: repeated_stratified_kfold
+
+_target_: sklearn.model_selection.RandomizedSearchCV
+_partial_: true
+
+scoring: accuracy
+n_iter: 20
+n_jobs: -1
+random_state: ${seed}
+return_train_score: true

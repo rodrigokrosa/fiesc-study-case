@@ -1,0 +1,5 @@
+defaults:
+  - model: logistic_regression
+  - datamodule: default
+
+_target_: src.model.trainer.Trainer

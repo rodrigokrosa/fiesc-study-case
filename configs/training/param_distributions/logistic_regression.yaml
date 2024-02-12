@@ -1,0 +1,4 @@
+C:
+  _target_: scipy.stats.loguniform
+  a: 1e-3
+  b: 1e3
