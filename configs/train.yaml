@@ -2,13 +2,13 @@ defaults:
   - _self_
   - trainer: default
   - search_strategy: random_search_cv
-  - param_distributions: logistic_regression
+  - param_distributions: xgboost
   - hydra: default
   - paths: default
   - wandb: default
 
 # General configs
-model_name: LogisticRegression
+model_name: XGBoost
 dataset_name: frequency-domain-features
 project_name: fiesc-study-case
 exp_number: "1"

@@ -1,5 +1,5 @@
 defaults:
-  - model: logistic_regression
+  - model: xgboost
   - datamodule: default
 
 _target_: src.model.trainer.Trainer

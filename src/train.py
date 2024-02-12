@@ -25,7 +25,7 @@ def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, An
     trainer = hydra.utils.instantiate(cfg.trainer)
 
     logger.info("Instantiating param distributions")
-    param_distributions = hydra.utils.instantiate(cfg.param_distributions)
+    param_distributions = hydra.utils.instantiate(cfg.param_distributions, _convert_="partial")
 
     logger.info("Instantiating search strategy")
     search_strategy = hydra.utils.instantiate(cfg.search_strategy)
