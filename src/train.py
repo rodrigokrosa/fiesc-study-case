@@ -1,9 +1,12 @@
 import logging
+from typing import Any, Dict, Tuple
 
 import autorootcwd  # noqa: F401
 import hydra
 import wandb
 from omegaconf import DictConfig, OmegaConf
+
+from utils import utils
 
 # import warnings
 # warnings.filterwarnings("ignore")
@@ -11,8 +14,8 @@ from omegaconf import DictConfig, OmegaConf
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(version_base="1.3", config_path="../configs/training", config_name="train.yaml")
-def main(cfg: DictConfig) -> None:
+@utils.task_wrapper
+def train(cfg: DictConfig) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
     """Main function for training a model using the specified configuration.
 
     Parameters:
@@ -56,6 +59,14 @@ def main(cfg: DictConfig) -> None:
 
     wandb.log(opt_score)
     wandb.log(test_score)
+
+    return opt_score, config_dict
+
+
+@hydra.main(version_base="1.3", config_path="../configs", config_name="train.yaml")
+def main(cfg: DictConfig) -> None:
+    """Main entry point for training."""
+    opt_score, config_dict = train(cfg)
 
 
 if __name__ == "__main__":
