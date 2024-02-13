@@ -14,4 +14,6 @@ Results: comparison table from experiments 1, 2, and 3.
 
 Results: comparison table with all the different model results.
 
+![Tabela de resultados do exp 2](exp2.png)
+
 3. After those experiments, repeat for the multi-label approach.
